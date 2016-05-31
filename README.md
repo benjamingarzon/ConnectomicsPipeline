@@ -1,3 +1,2 @@
 # ConnectomicsPipeline
-A pipeline to preprocess fmri data for connectomics analysis
-Requires BrainWavelet, SPM, DPARSFA
+A pipeline to preprocess fmri data for connectomics analysis. Requires BrainWavelet, SPM, DPARSFA and the Shen parcellation.
