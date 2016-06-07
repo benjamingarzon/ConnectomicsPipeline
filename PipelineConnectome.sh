@@ -42,7 +42,6 @@ nohup nice matlab -nodisplay -nosplash -r "wrapDPARSFA('DPARSFA_cfg/DPARSFA_stag
 # convert realignment parameters
 ./tsv2csv.py < $RS_DIR/RealignParameter/HeadMotion.tsv > $RS_DIR/RealignParameter/HeadMotion.csv
 
-nohup nice matlab -nodisplay -nosplash -r "wrapDPARSFA('DPARSFA_cfg/DPARSFA_stage2_MNI_1.mat', '$SUBJECTS', '$RS_DIR', $PARALLEL_WORKERS, 0, $TIMEPOINTS); exit" > $RS_DIR/logs/DPARSFA_stage2_MNI_1.log
 nohup nice matlab -nodisplay -nosplash -r "wrapDPARSFA('DPARSFA_cfg/DPARSFA_stage2_MNI_1_wcoreg.mat', '$SUBJECTS', '$RS_DIR', $PARALLEL_WORKERS, 0, $TIMEPOINTS); exit" > $RS_DIR/logs/DPARSFA_stage2_MNI_1.log
 
 # wavelet despiking
