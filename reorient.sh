@@ -31,8 +31,8 @@ EPIreg=$EPI
 T1BET="`tmpnam`.nii.gz"
 EPIBET="`tmpnam`.nii.gz"
 
-bet $T1 $T1BET -R -f 0.6
-bet $EPIMEAN $EPIBET -R
+doit "bet $T1 $T1BET -R -f 0.6"
+doit "bet $EPIMEAN $EPIBET -R"
 
 doit "mri_robust_register --mov $T1BET --dst $T1MNI --lta $T1FOLDER/$SUBJECT/T1toMNIinit.lta --iscale --sat 12 --maxit 10" 
 doit "mri_robust_register --mov $T1BET --dst $T1MNI --lta $T1FOLDER/$SUBJECT/T1toMNI.lta --iscale --sat 12 --maskdst $REORIENTMASK --ixform $T1FOLDER/$SUBJECT/T1toMNIinit.lta --maxit 10" 

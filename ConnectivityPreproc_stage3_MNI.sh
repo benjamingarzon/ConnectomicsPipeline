@@ -15,12 +15,12 @@ SUBJECT=$1
 mkdir $RS_DIR/Connectome$SUFFIX/$SUBJECT/
 cd $RS_DIR/Connectome$SUFFIX/$SUBJECT/
 echo $SUBJECT
-FMRI=$RS_DIR/FunMNI$SUFFIX/$SUBJECT/*Volume.nii
+FMRI=$RS_DIR/FunMNI$SUFFIX/$SUBJECT/data.nii.gz
 FMRI_NO_FILTER=$RS_DIR/FunMNI_no_filter/$SUBJECT/swradata.nii
 
 echo $FMRI
 # extract time courses from structures
-mri_segstats --excludeid 0 --seg $PARCELLATION_50 --i $FMRI --avgwf tcourses_50.csv
+#mri_segstats --excludeid 0 --seg $PARCELLATION_50 --i $FMRI --avgwf tcourses_50.csv
 mri_segstats --excludeid 0 --seg $PARCELLATION_150 --i $FMRI --avgwf tcourses_150.csv
 
 # threshold at % mean signal 
@@ -31,11 +31,11 @@ MEAN=`fslstats fast_restore -k $PARCELLATION_150 -M`
 
 LEVEL=`echo "$MEAN * $SIGNAL_THR" | bc -l`
 fslmaths fast_restore -thr $LEVEL -bin signal_mask
-mri_segstats --excludeid 0 --seg $PARCELLATION_50 --i signal_mask.nii.gz --avgwf signal_50.csv
+#mri_segstats --excludeid 0 --seg $PARCELLATION_50 --i signal_mask.nii.gz --avgwf signal_50.csv
 mri_segstats --excludeid 0 --seg $PARCELLATION_150 --i signal_mask.nii.gz --avgwf signal_150.csv
 
 # compute connectivities 
-matlab -nodisplay -nosplash -r "addpath $EXEC_DIR; calculate_connectivity_matrix('tcourses_50.csv', 'zFC_50.csv', 'signal_50.csv', $NODE_THR); exit" 
+#matlab -nodisplay -nosplash -r "addpath $EXEC_DIR; calculate_connectivity_matrix('tcourses_50.csv', 'zFC_50.csv', 'signal_50.csv', $NODE_THR); exit" 
 matlab -nodisplay -nosplash -r "addpath $EXEC_DIR; calculate_connectivity_matrix('tcourses_150.csv', 'zFC_150.csv', 'signal_150.csv', $NODE_THR); exit" 
 
 }
